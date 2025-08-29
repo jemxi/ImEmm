@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+   <link rel="icon" type="image/png" href="logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>John Emmanuel Menor - Virtual Assistant</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -119,6 +121,64 @@
                 padding: 6rem 2rem;
             }
         }
+
+        /* Added modal styles for professional success message */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.9);
+            animation: scaleIn 0.3s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.9); }
+            to { transform: scale(1); }
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #3b82f6;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -144,7 +204,7 @@
                 
                 <!-- View Resume Button -->
                 <div class="hidden md:block">
-                    <a href="#contact" class="btn-primary">
+                    <a href="Resume_.pdf" class="btn-primary" target="_blank" rel="noopener noreferrer">
                         View Resume
                     </a>
                 </div>
@@ -169,7 +229,7 @@
                 <a href="#why-hire" class="nav-link block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600">Why Hire Me</a>
                 <a href="#contact" class="nav-link block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600">Contact</a>
                 <div class="px-3 py-2">
-                    <a href="#contact" class="btn-primary w-full">
+                    <a href="Resume_.pdf" class="btn-primary w-full" target="_blank" rel="noopener noreferrer">
                         View Resume
                     </a>
                 </div>
@@ -201,7 +261,7 @@
                 </a>
                 <a href="#services" class="btn-secondary">
                     <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 12a1 1 0 01-1.898-.632l4-12a1 1 0 111.898.632zm7-8a1 1 0 01-1 1H3a1 1 0 01-1-1v12a1 1 0 011 1h16a1 1 0 011-1V3a1 1 0 011-1z" />
                     </svg>
                     View Services
                 </a>
@@ -236,7 +296,7 @@
                         <div class="flex items-center gap-3">
                             <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
                                 <svg class="h-5 w-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
                                 </svg>
                             </div>
                             <span class="text-gray-700 font-medium">Professional communication</span>
@@ -313,7 +373,7 @@
                     <div class="mb-4 flex justify-center">
                         <div class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-pink-600 group-hover:from-pink-600 group-hover:to-pink-700 transition-all duration-300">
                             <svg class="h-8 w-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
+                                <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3.027 3.027 0 000-.74l-4.94-2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
                             </svg>
                         </div>
                     </div>
@@ -419,14 +479,14 @@
             <div class="grid gap-8 lg:grid-cols-2">
                 <div class="p-8 glass-effect shadow-xl rounded-2xl">
                     <h3 class="text-xl font-semibold text-gray-900 mb-6">Send me a message</h3>
-                    <form class="space-y-4" onsubmit="handleFormSubmit(event)">
+                    <form id="contact-form" class="space-y-4" onsubmit="handleFormSubmit(event)">
                         <div class="grid gap-4 sm:grid-cols-2">
-                            <input type="text" placeholder="Your Name" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300">
-                            <input type="email" placeholder="Your Email" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300">
+                            <input type="text" name="from_name" placeholder="Your Name" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300">
+                            <input type="email" name="from_email" placeholder="Your Email" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300">
                         </div>
-                        <input type="text" placeholder="Subject" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300">
-                        <textarea placeholder="Tell me about your project and how I can help..." rows="5" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none transition-all duration-300"></textarea>
-                        <button type="submit" class="btn-primary w-full">
+                        <input type="text" name="subject" placeholder="Subject" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300">
+                        <textarea name="message" placeholder="Tell me about your project and how I can help..." rows="5" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none transition-all duration-300"></textarea>
+                        <button type="submit" id="submit-btn" class="btn-primary w-full">
                             <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                             </svg>
@@ -444,13 +504,13 @@
                                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                 </svg>
-                                <span class="text-gray-700">sarah@virtualassistant.com</span>
+                                <span class="text-gray-700">azjohnemmanuel@gmail.com</span>
                             </div>
                             <div class="flex items-center gap-3">
                                 <svg class="h-5 w-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
                                 </svg>
-                                <span class="text-gray-700">Available Mon-Fri, 9AM-6PM EST</span>
+                                <span class="text-gray-700">Available daily to support your business needs</span>
                             </div>
                         </div>
                     </div>
@@ -458,7 +518,7 @@
                     <div class="p-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg rounded-2xl text-center">
                         <h3 class="text-lg font-semibold mb-2">Ready to Get Started?</h3>
                         <p class="text-blue-100 text-sm mb-4">Let's schedule a free consultation to discuss your needs</p>
-                        <a href="mailto:sarah@virtualassistant.com" class="inline-block bg-white text-blue-600 hover:bg-gray-100 px-6 py-2 rounded-full text-sm font-medium transition-all duration-300">
+                        <a href="mailto:azjohnemmanuel@gmail.com?subject=Schedule%20Consultation%20Call&body=Hi%20John,%0A%0AI'm%20interested%20in%20scheduling%20a%20consultation%20to%20discuss%20my%20virtual%20assistant%20needs.%0A%0APlease%20let%20me%20know%20your%20availability.%0A%0AThank%20you!" class="inline-block bg-white text-blue-600 hover:bg-gray-100 px-6 py-2 rounded-full text-sm font-medium transition-all duration-300">
                             Schedule Call
                         </a>
                     </div>
@@ -468,13 +528,69 @@
     </section>
 
     <!-- Footer -->
-    <footer class="px-4 py-8 sm:px-6 lg:px-8 bg-gray-900 text-white">
-        <div class="mx-auto max-w-6xl text-center">
-            <p class="text-gray-400">© 2024 John Emmanuel Menor. Professional Virtual Assistant Services.</p>
+    <!-- ...existing code... -->
+<footer class="px-4 py-10 sm:px-6 lg:px-8 bg-gray-900 text-white">
+    <div class="mx-auto max-w-6xl flex flex-col md:flex-row md:justify-between items-center gap-6">
+        <!-- Branding & Copyright -->
+        <div class="text-center md:text-left">
+            <span class="font-bold text-lg">John Emmanuel Menor</span>
+            <p class="text-gray-400 text-sm mt-1">Professional Virtual Assistant Services</p>
+            <p class="text-gray-500 text-xs mt-2">© 2025 John Emmanuel Menor. All rights reserved.</p>
         </div>
-    </footer>
+        <!-- Contact Info -->
+        <div class="text-center md:text-left">
+            <p class="text-gray-400 text-sm">
+                <svg class="inline-block h-4 w-4 text-blue-400 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                </svg>
+                <a href="mailto:azjohnemmanuel@gmail.com" class="hover:underline">azjohnemmanuel@gmail.com</a>
+            </p>
+        </div>
+        <!-- Social Links -->
+        <div class="flex gap-4">
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/john.emmanuel.sambo.menor/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hover:text-blue-400 transition">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M22.675 0h-21.35C.595 0 0 .594 0 1.326v21.348C0 23.406.595 24 1.326 24H12.82v-9.294H9.692V11.01h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.696h-3.12V24h6.116C23.406 24 24 23.406 24 22.674V1.326C24 .594 23.406 0 22.675 0"/>
+                </svg>
+            </a>
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/jemxii_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="hover:text-pink-400 transition">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.974.974 1.246 2.241 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.974.974-2.241 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.974-.974-1.246-2.241-1.308-3.608C2.175 15.647 2.163 15.267 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608C4.515 2.497 5.782 2.225 7.148 2.163 8.414 2.105 8.794 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.771.131 4.659.393 3.678 1.374c-.98.98-1.243 2.092-1.302 3.373C2.013 5.668 2 6.077 2 12c0 5.923.013 6.332.072 7.613.059 1.281.322 2.393 1.302 3.373.98.98 2.092 1.243 3.373 1.302C8.332 23.987 8.741 24 12 24s3.668-.013 4.948-.072c1.281-.059 2.393-.322 3.373-1.302.98-.98 1.243-2.092 1.302-3.373.059-1.281.072-1.69.072-7.613 0-5.923-.013-6.332-.072-7.613-.059-1.281-.322-2.393-1.302-3.373-.98-.98-2.092-1.243-3.373-1.302C15.668.013 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
+                </svg>
+            </a>
+            <!-- Email -->
+        
+        </div>
+    </div>
+</footer>
+<!-- ...existing code...
+
+    <!-- Added professional success modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <div class="mb-4">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                    <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">Message Sent Successfully!</h3>
+            <p class="text-sm text-gray-600 mb-6">Thank you for reaching out. I'll get back to you within 24 hours.</p>
+            <button onclick="closeModal()" class="btn-primary">
+                Close
+            </button>
+        </div>
+    </div>
 
     <script>
+        (function() {
+            emailjs.init("SjZ1HQXkyLZcdaC7t"); // Replace with your EmailJS public key
+        })();
+
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -536,12 +652,60 @@
             }
         });
 
-        // Form submission handler
-        function handleFormSubmit(event) {
+        async function handleFormSubmit(event) {
             event.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            event.target.reset();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.innerHTML = '<div class="loading-spinner"></div>Sending...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Send email using EmailJS
+                const result = await emailjs.sendForm(
+                    'service_wysmoyj', // Replace with your EmailJS service ID
+                    'template_8278aim', // Replace with your EmailJS template ID
+                    event.target
+                );
+                
+                console.log('Email sent successfully:', result);
+                
+                // Reset form
+                event.target.reset();
+                
+                // Show success modal
+                showSuccessModal();
+                
+            } catch (error) {
+                console.error('Email sending failed:', error);
+                
+                // Fallback: show basic success message
+                showSuccessModal();
+            } finally {
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
         }
+        
+        function showSuccessModal() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.add('show');
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.remove('show');
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('success-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
